@@ -5,7 +5,7 @@ Gimp plugin "Engine template"
 
 An example, template plugin: 
 -written in Python, 
--having an internationalized GUI, 
+-having an internationalizable GUI, 
 -wrapping an engine plugin written in C, without a GUI.
 
 Copyright 2016 lloyd konneker (bootch at nc.rr.com)
@@ -61,22 +61,22 @@ def doFoo(timg, tdrawable, fooParam=50):
 # This mostly defines GUI for the plugin
 # Note it is internationalized il8n
 register(
-  "python_fu_engine_template",
-  N_("Template for wrapper for engine plugin"),
-  "Requires separate C-language engine-template plugin.",
-  "Lloyd Konneker",
-  "2016 Lloyd Konneker",  # Copyright 
+  "python_fu_engine_template",  #< PDB procedure name
+  N_("Template for wrapper for engine plugin"), #< blurb
+  "Requires separate C-language engine-template plugin.",   #< help
+  "Lloyd Konneker",       #< Author
+  "2016 Lloyd Konneker",  #< Copyright holder
   "2016",
-  N_("_Engine template..."),    # menu item
+  N_("_Engine template..."),    #< menu item
   "RGB*, GRAY*",
   [
     (PF_IMAGE, "image",       "Input image", None),
     (PF_DRAWABLE, "drawable", "Input drawable", None),
-    (PF_INT, "fooParam", _("Foo:"), 50),
+    (PF_INT, "fooParam", _("Foo:"), 50),    #<
   ],
   [],
   doFoo,    # Python method that implements plugin
-  menu="<Image>/Filters/Misc",  # parent menu
+  menu="<Image>/Filters/Misc",  #< parent menu
   domain=("engine-template", gimp.locale_directory)
   )
 
