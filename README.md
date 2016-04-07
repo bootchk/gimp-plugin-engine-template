@@ -2,12 +2,12 @@ GIMP Plugin Engine Template
 ===========================
 
 A template for a plugin for GIMP, where the plugin comprises:
-- Python GUI wrapper
-- C-language engine
+- Python GUI wrapper plugin
+- C-language engine plugin
 - C++ language adaptor from GIMP to some other image processing library/framework (here OpenCV)
 - inner crux of the algorithm (not included)
 
-Engine:
+Engine plugin:
 - without a GUI
 - without menu item in GIMP
 - doesn't run in interactive mode
@@ -23,12 +23,13 @@ Wrapper plugin:
 - registers in the PDB
 
 That is, the architecture is:
-Python plugin 
-   => engine plugin 
-      => adaptor from GIMP to image processing framework using C++ 
-         => inner algorithm
-      => libgimp
-      => image processing framework library (say OpenCV)
+
+    Python plugin 
+       => engine plugin 
+          => adaptor from GIMP to image processing framework using C++ 
+          => inner algorithm
+          => image processing framework library (say OpenCV)
+          => libgimp
       
 This architecture separates concerns.
 It is easier to express the GUI in a Python plugin using PyGimp.
@@ -46,8 +47,10 @@ It is reduced:
 - no checking GTK versions for GUI
 - no LASTVALS and defaults support
 - no autogen.sh (smaller autotools input files: configure.ac, Makefile.am, etc.)
+
 It is expanded:
 - supports building with OpenCV
+
 If you don't need or want this architecture (e.g. want GUI in your C-language plugin)
 or if you want to write a plugin that might be accepted into the GIMP main repository,
 use the original gimp-plugin-template.
@@ -55,8 +58,10 @@ use the original gimp-plugin-template.
 With this architecture, you have choices where to implement many steps.
 For example, you can preprocess in Python using PyGimp.
 Some notions, such as 'user's selection' are best dealt with there.
+You can also call image processing libraries that have Python bindings, such as OpenCV.
 You can implement inner algorithms in C using the GIMP framework,
-or in another framework that might be nearer to multi-processing
+or using another framework that might be nearer to multi-processing.
+You use C for low level algorithms that need speed.
 
 
 Building using Eclipse
@@ -77,10 +82,10 @@ There is no autogen.sh in this repository.
 Invoke autotools manually.
 This MIGHT work:
 
-autoreconf
-./configure
-make
-sudo make install
+    autoreconf
+    ./configure
+    make
+    sudo make install
 
 That might not work, because I often use Eclipse and I don't understand autotools well.
 
@@ -93,8 +98,8 @@ Building requires packages for:
 - OpenCV v2 dev
 
 You can hack out the dependency on OpenCV by editing (to remove anything mentioning OpenCV):
--configure.ac, 
--src/Makefile.am
+- configure.ac, 
+- src/Makefile.am
 
 
 Substituting
@@ -122,7 +127,7 @@ but in general not the names of any source files or functions.
 Testing
 -------
 
-After building and installing (without substitution) start GIMP and open an image,
+After building and installing (without substitution) start GIMP and open an image.
 You should find the Python plugin in the menus at 'Filters>Misc>Engine template...'.
 When you choose that menu item, expect a dialog.
 When you choose OK, expect an alert saying the plugin has finished but not actually done anything.
