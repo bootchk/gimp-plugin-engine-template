@@ -7,8 +7,10 @@ A template for a plugin for GIMP, where the plugin comprises:
 - C++ language adaptor from GIMP to some other image processing library/framework (here OpenCV)
 - inner crux of the algorithm (not included)
 
+In other words, not all GIMP plugins have a GUI.  GIMP plugins can invoke other plugins.  Here a Python plugin with GUI invokes a C-language plugin without GUI (the engine).
+
 Engine plugin:
-- without a GUI
+- without a GUI and i8ln
 - without menu item in GIMP
 - doesn't run in interactive mode
 - written in C/C++
@@ -17,7 +19,7 @@ Engine plugin:
 
 Wrapper plugin:
 - written in Python.
-- has GUI provided by PyGimp
+- has GUI provided by PyGimp, and i8ln
 - deals with last values
 - calls the C-language engine plugin via the PDB
 - registers in the PDB
@@ -69,7 +71,7 @@ Building using Eclipse
 
 This repository has an Eclipse project file.
 To use the Eclipse project requires installing a JRE and Eclipse (from the Eclipse website.)
-The Eclipse nature of the project is 'C/C++ autotools'.
+The Eclipse nature of the project is 'C/C++ Autotools'.
 You can build from within Eclipse, but to install, at a command line, cd to the project directory and 'sudo make install'
 which installs to /usr/lib/gimp/2.0/plug-ins.
 Or you can manually install to your personal GIMP at ~/.gimp-2.8/plug-ins, by copying gimp-plugin-engine-template.exe and plugin-engine-template.py, and making the latter executable.
@@ -80,14 +82,13 @@ Building without using Eclipse, from a command line
 
 There is no autogen.sh in this repository.
 Invoke autotools manually.
-This MIGHT work:
+This  SEEMS to work:
 
-    autoreconf
+    autoreconf -i
     ./configure
     make
     sudo make install
 
-That might not work, because I often use Eclipse and I don't understand autotools well.
 
 Dependencies
 ------------
@@ -129,7 +130,7 @@ Testing
 
 After building and installing (without substitution) start GIMP and open an image.
 You should find the Python plugin in the menus at 'Filters>Misc>Engine template...'.
-When you choose that menu item, expect a dialog.
+When you choose that menu item, expect a dialog (provided by PyGimp).
 When you choose OK, expect an alert saying the plugin has finished but not actually done anything.
 
 You should find the C-language plugin by browsing the PDB in GIMP at Filter>Python-Fu>Console ... Browse,
