@@ -117,7 +117,7 @@ adaptOpenCVToDrawable (
   GimpPixelRgn rgn_out;
 
   // create region for writing back
-  gimp_pixel_rgn_init (&rgn_out, drawable, upper, left, width, height, TRUE, TRUE);
+  gimp_pixel_rgn_init (&rgn_out, drawable, left, upper, width, height, TRUE, TRUE);
 
   // write raw data into region
   gimp_pixel_rgn_set_rect (&rgn_out, rect, left, upper, width, height);
