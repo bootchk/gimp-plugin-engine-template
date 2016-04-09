@@ -124,6 +124,9 @@ Also, changing the parameters (the API) to your inner engine require several cha
 
 You need to change the names under which the plugins register, 
 but in general not the names of any source files or functions.
+Except for the name of the executables, so they don't clash with others:
+- gimp-plugin-engine-template.exe
+- plugin-engine-template.py
 
 
 Testing
