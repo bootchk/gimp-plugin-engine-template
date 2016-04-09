@@ -73,8 +73,9 @@ This repository has an Eclipse project file.
 To use the Eclipse project requires installing a JRE and Eclipse (from the Eclipse website.)
 The Eclipse nature of the project is 'C/C++ Autotools'.
 You can build from within Eclipse, but to install, at a command line, cd to the project directory and 'sudo make install'
-which installs to /usr/lib/gimp/2.0/plug-ins.
+which installs to /usr/lib/gimp/2.0/plug-ins and /usr/local/lib/gimp/2.0/plug-ins (the Python).
 Or you can manually install to your personal GIMP at ~/.gimp-2.8/plug-ins, by copying gimp-plugin-engine-template.exe and plugin-engine-template.py, and making the latter executable.
+You might need to add the plugin path to /usr/local/lib.... in your GIMP preferences.
 
 
 Building without using Eclipse, from a command line

@@ -29,7 +29,7 @@
 #include <libgimp/gimp.h>
 #include <opencv2/core/core.hpp>
 #include "adaptOpenCV.hpp"
-
+#include "innerRender.hpp"
 
 
 
@@ -50,7 +50,9 @@ void renderUsingOpenCV (
     channels = gimp_drawable_bpp (drawable->drawable_id);
     data = g_new (guchar, channels * width * height);	// Allocate
     mat = adaptDrawableToOpenCV(drawable, data, left, upper, width, height);
-    // findDust(&mat);      //< insert image processing function(OpenCV Mat)
+
+    innerRender(mat); // image processing function(OpenCV Mat)
+
     adaptOpenCVToDrawable(drawable, data, left, upper, width, height);
     g_free (data);
     return;
